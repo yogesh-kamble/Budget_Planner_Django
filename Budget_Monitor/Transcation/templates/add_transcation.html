@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Add Transcation</title>
+		<meta name="author" content="Yogesh" />
+		<!-- Date: 2012-10-31 -->
+		{% load staticfiles %}
+		<script language="javascript" type="text/javascript" src="{% static "datetimepick/datetimepicker.js" %}">
+		</script>
+		Enter Transcation
+	</head>
+	<body>
+		
+		<form method="post" action="enter_transcation/save_transcation" name="transcation">
+			Expense:      <select>
+				          {% for expense in expense_list %}
+				              <option> {{ expense }} </option>
+				          {% endfor %}
+				
+			         </select><br/>
+			
+			Description:  <input type="text" name="desc" /><br/>
+			
+			Date:         <input id="date" type="text" size="25"><a href="javascript:NewCal('date','ddmmyyyy')"><img src="{% static "datetimepick/cal.gif" %}" width="16" height="16" border="0" alt="Pick a date"></a><br/>
+		    
+		    Amount:       <input type="text" name="amount" /><br/>
+		    <input type="submit" value="add" name="add_click"/> <input type="button" value="cancel"/>
+		</form>
+                    
+	</body>
+</html>
+
