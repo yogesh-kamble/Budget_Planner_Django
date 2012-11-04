@@ -14,7 +14,8 @@
 	</head>
 	<body>
 		
-		<form method="post" action="enter_transcation/save_transcation" name="transcation">
+		<form method="post" action="save_transcation/" name="transcation">
+		{% csrf_token %}
 			Expense:      <select>
 				          {% for expense in expense_list %}
 				              <option> {{ expense }} </option>

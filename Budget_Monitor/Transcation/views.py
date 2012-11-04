@@ -1,6 +1,7 @@
 from models import Amount,Expense,Category
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
+from django.template import RequestContext
 # Create your views here.
 
 def enter_transcation(request):
@@ -11,7 +12,9 @@ def enter_transcation(request):
     
     expense_name_list=[expense.name for expense in expense_obj_list]
     
-    return render_to_response('add_transcation.html',{"expense_list":expense_name_list})    
+    return render_to_response('add_transcation.html',
+				{"expense_list":expense_name_list},
+				context_instance=RequestContext(request))    
 
 
 def display_Transaction(request):
@@ -39,5 +42,6 @@ def save_transcation(request):
     Method for saving Transcation
     '''
     
-        
+    return render_to_response('add_transcation.html',
+				context_instance=RequestContext(request))    
     

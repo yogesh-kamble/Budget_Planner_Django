@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^enter_transcation/$','Transcation.views.enter_transcation'),
     url(r'^view_transcation/', 'Transcation.views.display_Transaction'),
-    url(r'^enter_transcation/save_transcation','Transcation.views.save_transcation'),
+    url(r'^enter_transcation/save_transcation/','Transcation.views.save_transcation'),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
