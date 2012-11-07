@@ -1,6 +1,8 @@
 from models import Amount,Expense,Category
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
+from django.template import RequestContext
+import datetime
 # Create your views here.
 
 def enter_transcation(request):
@@ -11,7 +13,7 @@ def enter_transcation(request):
     
     expense_name_list=[expense.name for expense in expense_obj_list]
     
-    return render_to_response('add_transcation.html',{"expense_list":expense_name_list})    
+    return render_to_response('add_transcation.html',{"expense_list":expense_name_list}, context_instance=RequestContext(request))    
 
 
 def display_Transaction(request):
@@ -46,13 +48,17 @@ def save_transcation(request):
         description=request.POST['desc']
         expense=request.POST['expense_value']
         
+        #change date format from dd-mm-yyyy to yyyy-mm-dd
+        datetime_obj=datetime.datetime.strptime(date, "%d-%m-%Y")
+        date=datetime_obj.strftime("%Y-%m-%d")
+        
         expense_obj=Expense.objects.filter(name=expense)
         expense_id=expense_obj[0].id
         
-        amount_obj = Amount(amount_value=amount, transcation_date=date, description=description, expense_id=expense_id)
+        amount_obj = Amount(amount_value=amount, transaction_date=date, description=description, expense_id=expense_id)
         amount_obj.save()
         
-        return render_to_response("add_transcation.html", {"transcation_save_ack":"Saved your Transcation"})
+        return render_to_response("add_transcation.html", {"transcation_save_ack":"Saved your Transcation"},context_instance=RequestContext(request))
         
         
     

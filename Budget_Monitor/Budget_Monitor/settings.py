@@ -108,7 +108,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/media/sda8/Money_Planner_Django/Budget_Monitor/Transcation/templates"
+    "/home/yogesh/Projects/Budget_Planner_Django/Budget_Monitor/Transcation/templates"
 )
 
 INSTALLED_APPS = (
