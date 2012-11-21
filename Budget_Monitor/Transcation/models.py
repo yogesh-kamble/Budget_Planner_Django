@@ -27,7 +27,7 @@ class Amount(models.Model):
 	amount_value = models.IntegerField('amount', max_length=100)
 	transaction_date = models.DateField('transaction_date')
 	description = models.CharField('description', max_length=200)
-	expense = models.ForeignKey(Expense)
+	category=models.ForeignKey(Category)
 	
 	class Meta:
 		db_table="amount" #Override Default behaviour of django table name creation

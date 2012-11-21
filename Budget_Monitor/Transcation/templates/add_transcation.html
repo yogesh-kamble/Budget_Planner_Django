@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-"http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML">
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 	<head>
@@ -10,29 +9,40 @@
 		{% load staticfiles %}
 		<script language="javascript" type="text/javascript" src="{% static "datetimepick/datetimepicker.js" %}">
 		</script>
-		Enter Transcation
+		<link style="text/css" rel="stylesheet" href="{% static "bootstrap/css/bootstrap.css" %}" />
+		<div class="row">
+		<h1 class="span9">Enter Transcation</h1>
+		</div>
+		<style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
 	</head>
-	<body>
-		
-		<form method="post" action="save_transcation" name="transcation">
+	<body style="background-color: white;">
+		<div class = "container-fluid">
+		<div class="row-fluid">
+		<form class="well" method="post" action="save_transcation" name="transcation">
 			{% csrf_token %}
-			Expense:      <select name="expense_value">
+			Expense:      <select name="expense_value" class="span4">
 				          {% for expense in expense_list %}
 				              <option value="{{ expense }}"> {{ expense }} </option>
 				          {% endfor %}
 				
-			         </select><br/>
+			              </select><br/>
 			
-			Description:  <input type="text" name="desc" /><br/>
+			Description:  <input type="text" name="desc" class="span4" /><br/>
 			
-			Date:         <input id="date" type="text" size="25" name="date_pick"><a href="javascript:NewCal('date','ddmmyyyy')"><img src="{% static "datetimepick/cal.gif" %}" width="16" height="16" border="0" alt="Pick a date"></a><br/>
+			Date:         <input id="date" type="text" size="25" name="date_pick" class="span4"><a href="javascript:NewCal('date','ddmmyyyy')"><img src="{% static "datetimepick/cal.gif" %}" width="16" height="16" border="0" alt="Pick a date"></a><br/>
 		    
-		    <span>Amount:</span>       <input type="text" name="amount" /><br/>
-		    <input type="submit" value="Add" name="add_click"/> <span><input type="button" value="cancel"/></span>
+		    Amount:		 <input type="text" name="amount" class="span4" /><br/>
+		    <input type="submit" value="Add" name="add_click" class="btn btn-primary"/> <span><input type="button" value="cancel" class="btn"/></span>
 		</form>
 		{% if transcation_save_ack %}
-		<p>{{ transcation_save_ack }}</p>
+		<p class="text-success">{{ transcation_save_ack }}</p>
 		{% endif %}
+		</div>
+		</div>
                     
 	</body>
 </html>
