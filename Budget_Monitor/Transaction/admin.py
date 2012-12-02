@@ -1,4 +1,4 @@
-from Transcation.models import Category,Expense,Amount
+from Transaction.models import Category,Expense,Amount
 from django.contrib import admin
 
 admin.site.register(Category)

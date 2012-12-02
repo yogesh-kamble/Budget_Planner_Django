@@ -19,7 +19,7 @@ def people(request):
     return render(request, "people.html",{"form":form})
         
 
-def enter_transcation(request):
+def enter_transaction(request):
     '''
     Method which render to add_transcation.html page.
     '''
@@ -44,7 +44,7 @@ def display_Transaction(request):
     
     return render_to_response('display.html',{"record_list":expense_amount_list})
 
-def save_transcation(request):
+def save_transaction(request):
     '''
     Method for saving Transcation
     '''
