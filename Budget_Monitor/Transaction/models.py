@@ -31,6 +31,10 @@ class Amount(models.Model):
 	
 	class Meta:
 		db_table="amount" #Override Default behaviour of django table name creation
+		
+
+		
+
 	
 
 	

@@ -57,5 +57,9 @@ create table income(id INT(20) NOT NULL auto_increment PRIMARY KEY, source varch
 
 create table source(id INT(20) NOT NULL auto_increment PRIMARY KEY, name varchar(100)) DEFAULT CHARSET=utf8;
 
-insert into source (name) values ("Income Source/Employer"),("Part Time"),("Retirement/Pension"),("Support from Family/Friends"); 
+insert into source (name) values ("Income Source/Employer"),("Part Time"),("Retirement/Pension"),("Support from Family/Friends");
+
+-- Create Net Worth Table
+
+create table networth(id INT(20) NOT NULL auto_increment PRIMARY KEY, networth_value INT(100)); 
 

@@ -8,7 +8,8 @@
 <div class = "container-fluid">
 		<div class="row-fluid">
 		{% load staticfiles %}
-		<form class="well" method="post" action="save_transaction" name="transcation">
+		<form class="form-horizontal" method="post" action="/transaction/save/" name="transaction">
+			<fieldset>
 			{% csrf_token %}
 			Expense:      <select name="expense_value" class="span4">
 				          {% for expense in expense_list %}
@@ -23,6 +24,7 @@
 		    
 		    Amount:		 <input type="text" name="amount" class="span4" /><br/>
 		    <input type="submit" value="Add" name="add_click" class="btn btn-primary"/> <span><input type="button" value="cancel" class="btn"/></span>
+		</fieldset>
 		</form>
 		{% if transcation_save_ack %}
 		<p class="text-success">{{ transcation_save_ack }}</p>

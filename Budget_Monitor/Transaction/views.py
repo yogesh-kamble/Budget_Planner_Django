@@ -66,7 +66,7 @@ def save_transaction(request):
         amount_obj = Amount(amount_value=amount, transaction_date=date, description=description, category_id=expense_id)
         amount_obj.save()
         
-        return render_to_response("add_transcation.html", {"transcation_save_ack":"Saved your Transcation"},context_instance=RequestContext(request))
+        return render_to_response("add_transcation.html", {"transaction_save_ack":"Saved your Transaction"},context_instance=RequestContext(request))
         
         
     
