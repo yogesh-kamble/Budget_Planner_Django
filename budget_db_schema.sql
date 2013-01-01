@@ -9,8 +9,7 @@ create table category(id INT(20) NOT NULL auto_increment, name varchar(100), PRI
 
 -- Insert default values to category
 LOCK TABLES category WRITE;
-insert into category (name) values("Housing"), ("Food"), ("Insurance"), ("Medical Care"), ("Transportation"), ("Child Care"), 
-                                  ("Income Taxes"),("Saving"),("Entertainment");
+INSERT INTO `category` VALUES (1,'Housing'),(2,'Food'),(3,'Insurance'),(4,'Medical Care'),(5,'Transportation'),(6,'Child Care'),(7,'Income Taxes'),(8,'Saving'),(9,'Entertainment'),(11,'Shopping'),(12,'Vehicle Servicing'),(13,'Other');
 UNLOCK TABLES;                                  
 -- Expense Table
 
@@ -33,7 +32,7 @@ UNLOCK TABLES;
 
 -- Create Amount table
 
-create table amount(id INT(100) NOT NULL auto_increment, amount_value INT(100), transaction_date date, description varchar(100), expense_id INT(50), FOREIGN KEY(expense_id) references expense(id), PRIMARY KEY(id)) DEFAULT CHARSET=utf8;
+create table amount(id INT(100) NOT NULL auto_increment, amount_value INT(100), transaction_date date, description varchar(100), category_id INT(50), FOREIGN KEY(category_id) references category(id), PRIMARY KEY(id)) DEFAULT CHARSET=utf8;
 
 
 -- Create Budget_Type Table
@@ -44,22 +43,21 @@ create table budget_type(id INT(20) NOT NULL auto_increment PRIMARY KEY, set_bud
 LOCK TABLES budget_type WRITE;
 insert into budget_type (set_budget) values
             ("Monthly"),
-            ("Yearly");
+            ("Semi-Annually"),
+            ("Annually");
 UNLOCK TABLES; 
 
 -- Create Budget Table
-
 create table budget(id INT(100) NOT NULL auto_increment PRIMARY KEY, budget_value INT(100), budget_type_id INT(20), FOREIGN KEY(budget_type_id) references budget_type(id)); 
 
--- Create Monthly Income Table
-
-create table income(id INT(20) NOT NULL auto_increment PRIMARY KEY, source varchar(100), amount INT(100), month date) DEFAULT CHARSET=utf8;     
-
+-- Add default income source
 create table source(id INT(20) NOT NULL auto_increment PRIMARY KEY, name varchar(100)) DEFAULT CHARSET=utf8;
 
-insert into source (name) values ("Income Source/Employer"),("Part Time"),("Retirement/Pension"),("Support from Family/Friends");
+insert into source (name) values ("Income Source/Employer"),("Part Time"),("Retirement/Pension"),("Support from Family/Friends"),("Other");
+
+-- Create Monthly Income Table
+create table income(id INT(20) NOT NULL auto_increment PRIMARY KEY, source_id INT(20),amount INT(100), income_month date, FOREIGN KEY(source_id) references source(id)) DEFAULT CHARSET=utf8;     
 
 -- Create Net Worth Table
-
 create table networth(id INT(20) NOT NULL auto_increment PRIMARY KEY, networth_value INT(100)); 
 

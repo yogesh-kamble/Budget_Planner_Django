@@ -36,7 +36,7 @@ class income(models.Model):
     '''
     source = models.ForeignKey(source)
     amount = models.IntegerField('amount', max_length=100)
-    month = models.DateField('month')
+    income_month = models.DateField('income_month')
     
     class Meta:
         db_table = "income"
