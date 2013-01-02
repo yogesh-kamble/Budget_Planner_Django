@@ -8,7 +8,7 @@
 			<tr>
 			<th>Income_Source</th>
 			<th>Amount</th>
-			<th>Month</th>
+			<th>Date</th>
 			</tr>
 			
 			{% for record,source_name in record_list %}
@@ -16,7 +16,7 @@
 			    	
 			    	<td>{{ source_name }}</td>
 			    	<td>{{ record.amount }}</td>
-			    	<td>{{ record.month }}</td>
+			    	<td>{{ record.income_month }}</td>
 			    </tr>
 			
 			    
