@@ -6,8 +6,9 @@ Created on 09-Dec-2012
 from django import forms
 from django.forms import widgets
 from django.forms.extras.widgets import SelectDateWidget
-from budget_manager.models import source
+from budget_manager.models import Source,Recurrence,Account
 from datetime import date
+import pdb
 
 class DateSelectorWidget(widgets.MultiWidget):
     def __init__(self, attrs=None):
@@ -44,18 +45,24 @@ class DateSelectorWidget(widgets.MultiWidget):
         else:
             return str(D)
 
-def get_source_list():
-    '''
-    return income source_list
-    '''
-    source_list=[]
-    source_obj = source.objects.all()
+# Subclass ModelChoiceField to return name of source for representing it on html.
+class SourceChoiceField(forms.ModelChoiceField):
     
-    #source_name_list = [src.name for src in source_obj]
-    for src in source_obj:
-        source_list.append((src.id, src.name))
-    return source_list
+    def label_from_instance(self, obj):
+        '''
+        '''
+        return obj.name
 
+class AccountChoiceField(forms.ModelChoiceField):
+    
+    def label_from_instance(self, obj):
+        return obj.name
+
+
+class RecurrenceChoiceField(forms.ModelChoiceField):
+    
+    def label_from_instance(self, obj):
+        return obj.recurrence_type
 
 
 
@@ -63,9 +70,17 @@ class Incomeform(forms.Form):
     '''
     This is form for entering income detail
     '''
-    INCOME_SOURCE_CHOICES = tuple(get_source_list())
-    source_name = forms.ChoiceField(choices = INCOME_SOURCE_CHOICES)
-    income = forms.IntegerField(help_text="Enter your monthly Income")
-    month = forms.DateField(widget = SelectDateWidget, required=False)
+    Source_name = SourceChoiceField(queryset = Source.objects.all(),  empty_label=None)
+    Accout_name = AccountChoiceField(queryset = Account.objects.all(), empty_label = None)
+    Recurrence = RecurrenceChoiceField(queryset = Recurrence.objects.all(), empty_label=None)
+    Income = forms.IntegerField(help_text="Enter your monthly Income")
+    Date = forms.DateField(widget = SelectDateWidget, required=False)
+    
+class Accountform(forms.Form):
+    '''
+    This is form for enetering your budget.(Main Goal of Budget_Planner)
+    '''
+    name = forms.CharField(max_length=50)
+    balance = forms.IntegerField()
     
     

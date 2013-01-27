@@ -2,11 +2,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
-from budget_manager.models import source,income
-from budget_manager.income_form import Incomeform
-from django.db.models import Sum
+from budget_manager.income_form import Incomeform, Accountform
+from income_base import Income_Base,Account_Base
+import pdb
 
-
+INCOME_OBJ = Income_Base()
+ACCOUNT_OBJ = Account_Base()
 def process_income(request):
     '''
     '''
@@ -17,13 +18,7 @@ def process_income(request):
             '''
             Store Income into database
             '''
-            month = form.cleaned_data['month']
-            income_source = form.cleaned_data['source_name']
-            income_val = form.cleaned_data['income']
-            income_source = dict(form.INCOME_SOURCE_CHOICES)[int(income_source)]
-            source_obj = source.objects.filter(name=income_source)
-            income_obj = income(source_id=source_obj[0].id, amount=income_val, income_month=month)
-            income_obj.save()
+            INCOME_OBJ.add_income(form)
             income_status = True
             
             
@@ -38,13 +33,22 @@ def display_income(request):
     '''
     Used For Displaying Income
     '''
-    income_record_list=[]
-    income_record_obj_list = income.objects.all()
-    total_income=income_record_obj_list.aggregate(total_income=Sum('amount'))['total_income']
-    for income_record in income_record_obj_list:
-        source_name = source.objects.filter(id=income_record.source_id)[0].name
-        income_record_list.append([income_record,source_name])
+    (income_record_list, total_income)=INCOME_OBJ.get_income()
         
     return render_to_response('income_display.html',{"record_list":income_record_list,'total_income':total_income})
     
+
+def create_account(request):
+    '''
+    '''
+    if request.method == "POST":
+        form_obj = Accountform(request.POST)
+        if form_obj.is_valid():
+            ACCOUNT_OBJ.add_account(form_obj)
+            
+    else:
+        form_obj=Accountform()
+        return render_to_response("add_account.html",{"form":form_obj}, context_instance=RequestContext(request))
     
+    del form_obj
+    return render_to_response("add_income.html",{"form":Accountform()}, context_instance=RequestContext(request))

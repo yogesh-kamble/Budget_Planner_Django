@@ -1,7 +1,7 @@
 from budget_manager.models import *
 from django.contrib import admin
 
-admin.site.register(budget_type)
-admin.site.register(budget)
-admin.site.register(source)
-admin.site.register(income)
+admin.site.register(Budget_Type)
+admin.site.register(Budget)
+admin.site.register(Source)
+admin.site.register(Income)

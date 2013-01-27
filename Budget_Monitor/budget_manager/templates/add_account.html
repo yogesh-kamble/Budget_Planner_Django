@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %} Budget {% endblock %}
+
+{% block heading %}Add Account Details{% endblock %}
+
+{% block content %}
+<p>Enter your Account Details</p>
+
+<form class="well" method="post" action="/budget/create_account/" name="account">
+	<!--
+	{% for source in source_list %} 
+		<label name = {{source}}>{{ source }}</label>
+		<input type="text" name={{source}}/>
+	{% endfor %}
+	-->
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Add" name="add_click" class="btn btn-primary"/> <span><input type="button" value="cancel" class="btn"/></span>
+	{% if income_status %}
+		<p class="text-success">Account Set Up Completed</p>
+	{% endif %}
+</form> 
+
+{% endblock content %}
