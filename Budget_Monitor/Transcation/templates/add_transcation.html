@@ -14,21 +14,25 @@
 	</head>
 	<body>
 		
-		<form method="post" action="enter_transcation/save_transcation" name="transcation">
-			Expense:      <select>
+		<form method="post" action="save_transcation" name="transcation">
+			{% csrf_token %}
+			Expense:      <select name="expense_value">
 				          {% for expense in expense_list %}
-				              <option> {{ expense }} </option>
+				              <option value="{{ expense }}"> {{ expense }} </option>
 				          {% endfor %}
 				
 			         </select><br/>
 			
 			Description:  <input type="text" name="desc" /><br/>
 			
-			Date:         <input id="date" type="text" size="25"><a href="javascript:NewCal('date','ddmmyyyy')"><img src="{% static "datetimepick/cal.gif" %}" width="16" height="16" border="0" alt="Pick a date"></a><br/>
+			Date:         <input id="date" type="text" size="25" name="date_pick"><a href="javascript:NewCal('date','ddmmyyyy')"><img src="{% static "datetimepick/cal.gif" %}" width="16" height="16" border="0" alt="Pick a date"></a><br/>
 		    
-		    Amount:       <input type="text" name="amount" /><br/>
-		    <input type="submit" value="add" name="add_click"/> <input type="button" value="cancel"/>
+		    <span>Amount:</span>       <input type="text" name="amount" /><br/>
+		    <input type="submit" value="Add" name="add_click"/> <span><input type="button" value="cancel"/></span>
 		</form>
+		{% if transcation_save_ack %}
+		<p>{{ transcation_save_ack }}</p>
+		{% endif %}
                     
 	</body>
 </html>

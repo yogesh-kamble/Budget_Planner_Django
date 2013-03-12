@@ -39,5 +39,22 @@ def save_transcation(request):
     Method for saving Transcation
     '''
     
+    if request.method == "POST":
+        
+        amount=request.POST["amount"]
+        date=request.POST["date_pick"]
+        description=request.POST['desc']
+        expense=request.POST['expense_value']
+        
+        expense_obj=Expense.objects.filter(name=expense)
+        expense_id=expense_obj[0].id
+        
+        amount_obj = Amount(amount_value=amount, transcation_date=date, description=description, expense_id=expense_id)
+        amount_obj.save()
+        
+        return render_to_response("add_transcation.html", {"transcation_save_ack":"Saved your Transcation"})
+        
+        
+    
         
     
