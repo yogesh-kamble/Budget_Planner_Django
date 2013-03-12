@@ -52,8 +52,8 @@ class Income_Base:
         income_record_obj_list = Income.objects.all()
         total_income=income_record_obj_list.aggregate(total_income=Sum('amount'))['total_income']
         for income_record in income_record_obj_list:
-            source_name = Source.objects.filter(id=income_record.source_id)[0].name
-            income_record_list.append([income_record,source_name])
+            #source_name = Source.objects.filter(id=income_record.source_id)[0].name
+            income_record_list.append(income_record)
             
         return (income_record_list, total_income)
         
@@ -80,9 +80,10 @@ class Account_Base:
         return
         
     
-    def get_account(self,request):
+    def get_account(self):
         '''
         '''
+        account_list = Account.objects.all()
 
 
 if __name__ == "__main__":

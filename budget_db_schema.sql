@@ -28,15 +28,7 @@ insert into expense (name,category_id) values
        ("Vehicle Payment",5),
        ("Gasoline/Oil",5);
 
-UNLOCK TABLES;       
-
--- Create Amount table
-
-create table amount(id INT(100) NOT NULL auto_increment, \
-					amount_value INT(100), transaction_date date, \
-					description varchar(100), category_id INT(50), \
-					CONSTRAINT amount_fk_cat FOREIGN KEY(category_id) references category(id), \
-					CONSTRAINT amount_pk PRIMARY KEY(id)) DEFAULT CHARSET=utf8;
+UNLOCK TABLES;
 
 
 -- Create Budget_Type Table
@@ -60,9 +52,10 @@ create table source(id INT(20) NOT NULL auto_increment PRIMARY KEY, name varchar
 insert into source (name) values ("Income Source/Employer"),("Part Time"),("Retirement/Pension"),("Support from Family/Friends"),("Other");
 
 -- create recurrence table
-create table recurrence(id INT(20) NOT NULL auto_increment PRIMARY KEY, \
-						recurrence_type varchar(20), \
-						CONSTRAINT UNIQUE recurrence_type);
+create table recurrence(id INT(20) NOT NULL auto_increment, \
+			recurrence_type varchar(20), \
+			CONSTRAINT type_unique UNIQUE KEY (recurrence_type), \
+			CONSTRAINT recurrence_pk PRIMARY KEY(id)) DEFAULT CHARSET=utf8;
 
 -- Insert Values to recurrence table
 LOCK TABLES recurrence WRITE;
@@ -77,15 +70,15 @@ UNLOCK TABLES;
 -- Account need to be set up first after user registration.
 create table account(id INT(20) NOT NULL auto_increment PRIMARY KEY, \
 					 name varchar(20), \
-					 balance INT(20)
-					 CONSTRAINT UNIQUE KEY name);
+					 balance INT(20),
+					 CONSTRAINT name_unique UNIQUE KEY (name));
 
 -- Account Source Map table
 create table account_source_map(id INT(20) NOT NULL auto_increment, source_id INT(20), account_id INT(20), \
 								CONSTRAINT fk_sou FOREIGN KEY(source_id) references source(id),\
 								CONSTRAINT fk_acc FOREIGN KEY(account_id) references account(id),\
 								CONSTRAINT UNIQUE KEY (source_id, account_id), \
-								CONSTRAINT acc_sou_red_pk PRIMARY KEY(id)) default charset=utf-8;
+								CONSTRAINT acc_sou_red_pk PRIMARY KEY(id)) default charset=utf8;
 
 -- Create Income Table
 create table income(id INT(20) NOT NULL auto_increment PRIMARY KEY, account_source_map_id INT(20), \
@@ -102,6 +95,18 @@ create table currency(id INT(20) NOT NULL auto_increment PRIMARY KEY, currency_t
 
 -- Insert Currency type
 LOCK TABLES currency WRITE;
-insert into currency(currency_type) values("Indian(INR)","US(Dollar)");
+insert into currency(currency_type) values("Indian(INR)"),("US(Dollar)");
 UNLOCK TABLES;
+
+-- Create Daily_Transaction table
+
+create table daily_transaction(id INT(100) NOT NULL auto_increment, \
+					account_id INT(20) NOT NULL, \
+					category_id INT(20) NOT NULL, \
+					amount_value INT(100), \
+					description varchar(100), \
+					transaction_date date, \
+					CONSTRAINT da_tran_fk_cat FOREIGN KEY(category_id) references category(id), \
+					CONSTRAINT da_tran_fk_acc FOREIGN KEY(account_id) references account(id), \
+					CONSTRAINT amount_pk PRIMARY KEY(id)) DEFAULT CHARSET=utf8;
 

@@ -109,8 +109,9 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/Transcation/templates",
-    "/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/budget_manager/templates",
+    "/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/templates",
+    "/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/templates/transaction",
+    "/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/templates/budget_manager",
 )
 
 INSTALLED_APPS = (
@@ -128,7 +129,6 @@ INSTALLED_APPS = (
     'Transaction',
     'home',
     'budget_manager',
-    
 )
 
 # A sample logging configuration. The only tangible logging
