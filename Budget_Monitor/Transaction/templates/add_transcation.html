@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %} Enter Transcation {% endblock %}
+
+{% block heading %}Hey It's Amazing{% endblock %}
+
+{% block content %}
+<div class = "container-fluid">
+		<div class="row-fluid">
+		{% load staticfiles %}
+		<form class="form-horizontal" method="post" action="/transaction/save/" name="transaction">
+			<fieldset>
+			{% csrf_token %}
+			Expense:      <select name="expense_value" class="span4">
+				          {% for expense in expense_list %}
+				              <option value="{{ expense }}"> {{ expense }} </option>
+				          {% endfor %}
+				
+			              </select><br/>
+			
+			Description:  <input type="text" name="desc" class="span4" /><br/>
+			
+			Date:         <input id="date" type="text" size="25" name="date_pick" class="span4"><a href="javascript:NewCal('date','ddmmyyyy')"><img src="{% static "datetimepick/cal.gif" %}" width="16" height="16" border="0" alt="Pick a date"></a><br/>
+		    
+		    Amount:		 <input type="text" name="amount" class="span4" /><br/>
+		    <input type="submit" value="Add" name="add_click" class="btn btn-primary"/> <span><input type="button" value="cancel" class="btn"/></span>
+		</fieldset>
+		</form>
+		{% if transcation_save_ack %}
+		<p class="text-success">{{ transcation_save_ack }}</p>
+		{% endif %}
+		</div>
+		</div>
+{% endblock content %}
+
