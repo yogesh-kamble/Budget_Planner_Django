@@ -2,28 +2,40 @@
 
 {% block title %} Display {% endblock %}
 
-{% block heading %}Transaction details{% endblock %}
+{% block heading %}
+	<ul id="base_menu">
+		<li>Transaction details</li>
+	</ul>
+{% endblock %}
 
 {% block content %}
-	
-		<table class="table">
-			<tr>
-			<th>Expense_Name</th>
-			<th>Date</th>
-			<th>Description</th>
-			<th>Amount</th>
-			</tr>
-			
-			{% for record,expense_name in record_list %}
-			    <tr>
-			    	
-			    	<td>{{ expense_name }}</td>
-			    	<td>{{ record.transaction_date }}</td>
-			    	<td>{{ record.description }}</td>
-			    	<td>{{ record.amount_value }}</td>
-			    </tr>
-			    
-			{% endfor %}
+		<div class="offset2 span8">
+		<table class="table table-hover table-bordered table-striped">
+			<thead>
+			  <tr>
+				<th>Expense_Name</th>
+				<th>Date</th>
+				<th>Description</th>
+			    <th>Amount</th>
+			  </tr>
+			</thead>
+			<tbody>
+				{% for record,expense_name in record_list %}
+				    <tr>
+				    	
+				    	<td>{{ expense_name }}</td>
+				    	<td>{{ record.transaction_date }}</td>
+				    	<td>{{ record.description }}</td>
+				    	<td>{{ record.amount_value }}</td>
+				    </tr>
+				    
+				{% endfor %}
+			</tbody>
 		</table>
-		
-{% endblock content %}
+		</div>
+{% endblock %}
+
+{% block script %}
+
+<script type="text/javascript"/>
+{% endblock%}
