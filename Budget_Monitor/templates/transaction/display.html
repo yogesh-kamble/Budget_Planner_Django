@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %} Display {% endblock %}
+
+{% block heading %}Transaction details{% endblock %}
+
+{% block content %}
+	
+		<table class="table">
+			<tr>
+			<th>Account</th>
+			<th>Category</th>
+			<th>Description</th>
+			<th>Amount</th>
+			<th>Date</th>
+			</tr>
+			
+			{% for record in expense_list %}
+			    <tr>
+			    	
+			    	<td>{{ record.account.name }}</td>
+			    	<td>{{ record.category.name }}</td>
+			    	<td>{{ record.description }}</td>
+			    	<td>{{ record.amount_value }}</td>
+			    	<td>{{ record.transaction_date }}</td>
+			    </tr>
+			    
+			{% endfor %}
+		</table>
+		<p> Total Expense : {{ total_expense }} </p>
+		
+{% endblock content %}
