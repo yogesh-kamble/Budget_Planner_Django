@@ -51,6 +51,9 @@ class Account(models.Model):
     name=models.CharField(max_length=100)
     balance=models.IntegerField('balance', max_length=100)
     
+    def __unicode__(self):
+        return self.name
+    
     class Meta:
         db_table="account"
 
@@ -70,6 +73,14 @@ class Income(models.Model):
     amount = models.IntegerField('amount', max_length=100)
     recurrence=models.ForeignKey(Recurrence)
     income_date = models.DateField('income_month')
+    
+    def source_display(self):
+        return ("%s"%self.account_source_map.source)
+    def account_display(self):
+        return ("%s"%self.account_source_map.account)
+    
+    source_display.short_description = "Income Source"
+    account_display.short_description = "Account"
     
     class Meta:
         db_table = "income"

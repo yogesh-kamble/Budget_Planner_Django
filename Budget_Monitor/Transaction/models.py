@@ -1,5 +1,5 @@
 from django.db import models
-
+from budget_manager.models import Account
 # Create your models here.
 
 class Category(models.Model):
@@ -23,14 +23,17 @@ class Expense(models.Model):
 		db_table="expense" #Override Default behaviour of django table name creation
 	
 
-class Amount(models.Model):
+class Daily_Transaction(models.Model):
+	account = models.ForeignKey(Account)
+	category = models.ForeignKey(Category)
 	amount_value = models.IntegerField('amount', max_length=100)
+	description = models.CharField(max_length=100)
 	transaction_date = models.DateField('transaction_date')
-	description = models.CharField('description', max_length=200)
-	category=models.ForeignKey(Category)
 	
+	def __unicode__(self):
+		return str(self.id)
 	class Meta:
-		db_table="amount" #Override Default behaviour of django table name creation
+		db_table="daily_transaction" #Override Default behaviour of django table name creation
 		
 
 		

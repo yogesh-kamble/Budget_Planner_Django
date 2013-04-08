@@ -1,5 +1,6 @@
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from budget_manager.income_form import Incomeform, Accountform
@@ -21,11 +22,8 @@ def process_income(request):
             INCOME_OBJ.add_income(form)
             income_status = True
             
-            
-    else:
-        form = Incomeform()
-        return render_to_response ("add_income.html",{"form":form}, context_instance=RequestContext(request))
-    del form
+            return HttpResponseRedirect(reverse("budget_manager.views.process_income"))
+    
     return render_to_response("add_income.html",{"form":Incomeform(),"income_status":income_status},context_instance=RequestContext(request))
 
 
@@ -45,10 +43,6 @@ def create_account(request):
         form_obj = Accountform(request.POST)
         if form_obj.is_valid():
             ACCOUNT_OBJ.add_account(form_obj)
-            
-    else:
-        form_obj=Accountform()
-        return render_to_response("add_account.html",{"form":form_obj}, context_instance=RequestContext(request))
+            return HttpResponseRedirect(reverse("budget_manager.views.create_account"))
     
-    del form_obj
-    return render_to_response("add_income.html",{"form":Accountform()}, context_instance=RequestContext(request))
+    return render_to_response("add_account.html",{"form":Accountform()}, context_instance=RequestContext(request))

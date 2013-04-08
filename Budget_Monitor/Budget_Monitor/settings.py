@@ -136,7 +136,6 @@ INSTALLED_APPS = (
     'Transaction',
     'home',
     'budget_manager',
-    
 )
 
 # A sample logging configuration. The only tangible logging
