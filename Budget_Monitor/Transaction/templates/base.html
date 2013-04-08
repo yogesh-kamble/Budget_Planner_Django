@@ -6,10 +6,10 @@
 		<meta name="author" content="Yogesh" />
 		<!-- Date: 2012-10-31 -->
 		{% load staticfiles %}
-		<script language="javascript" type="text/javascript" src="{% static "datetimepick/datetimepicker.js" %}">
-		</script>
-		<script language="javascript" type="text/javascript" src="{% static "bootstrap/js/bootstrap.js" %}"></script>
+		
 		<link style="text/css" rel="stylesheet" href="{% static "bootstrap/css/bootstrap.css" %}" />
+		<link style="text/css" rel="stylesheet" href="{% static "bootstrap/css/bootstrap-modal.css" %}" />
+		<link style="text/css" rel="stylesheet" href="{% static "css/base.css" %}" />
 		<div class="row">
 		<h1 class="span9">{% block heading %}Transcation Details{% endblock %}</h1>
 		</div>
@@ -22,5 +22,11 @@
 	<body>
 		{% block content %}
 		{% endblock content %}
-	</body> 
+	</body>
+	<script language="javascript" type="text/javascript" src="{% static "datetimepick/datetimepicker.js" %}"></script>
+	<script type="text/javascript" charset="utf-8" src="{% static "js/jquery.js" %}"></script>
+	<script language="javascript" type="text/javascript" src="{% static "bootstrap/js/bootstrap.js" %}"></script>
+    <script language="javascript" type="text/javascript" src="{% static "bootstrap/js/bootstrap-modal.js" %}"></script>
+    <script language="javascript" type="text/javascript" src="{% static "bootstrap/js/bootstrap-modalmanager.js" %}"></script>
+    
 	</html>
