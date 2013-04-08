@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %} Enter Transcation {% endblock %}
+
+{% block heading %}Add Expenses{% endblock %}
+
+{% block content %}
+<script>
+	function validate_form()
+	{
+		
+	}
+</script>
+<div class = "container-fluid">
+		<div class="row-fluid">
+		{% load staticfiles %}
+		<form class="form-horizontal" method="post" action="/transaction/enter/" name="transaction">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value="Add" name="add_click" class="btn btn-primary"/> 
+		</form>
+		{% if transcation_save_ack %}
+		<p class="text-success">{{ transcation_save_ack }}</p>
+		{% endif %}
+		</div>
+</div>
+{% endblock content %}
+
