@@ -1,4 +1,9 @@
 # Django settings for Budget_Monitor project.
+import os
+import sys
+
+PROJECT_ROOT = os.path.realpath('{0}/../../'.format(os.path.dirname(__file__)))
+APPS_DIR = os.path.realpath('{0}/Budget_Monitor'.format(PROJECT_ROOT))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -56,7 +61,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -67,7 +72,8 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/Budget_Monitor/static',
+#    '/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/Budget_Monitor/static',
+    os.path.join(APPS_DIR, '/budget_manager/static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -109,8 +115,10 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/Transcation/templates",
-    "/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/budget_manager/templates",
+#    "/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/Transcation/templates",
+#    "/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/budget_manager/templates",
+    os.path.join(APPS_DIR, '/Transaction/templates'),
+    os.path.join(APPS_DIR, '/budget_manager/templates')
 )
 
 INSTALLED_APPS = (
