@@ -1,11 +1,13 @@
 # Django settings for Budget_Monitor project.
-
+import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
+
+ROOT = os.path.dirname(__file__)
 
 MANAGERS = ADMINS
 
@@ -56,7 +58,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(ROOT, "static")
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -67,7 +69,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/Budget_Monitor/static',
+    #'/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/Budget_Monitor/static',
 )
 
 # List of finder classes that know how to find static files in
@@ -109,9 +111,9 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/templates",
-    "/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/templates/transaction",
-    "/home/yogesh/Documents/Aptana Studio 3 Workspace/Budget_Planner/Budget_Monitor/templates/budget_manager",
+    os.path.join(ROOT, "templates"),
+    os.path.join(ROOT, "templates", "transaction"),
+    os.path.join(ROOT, "templates", "budget_manager"),
 )
 
 INSTALLED_APPS = (
